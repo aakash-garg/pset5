@@ -34,7 +34,7 @@ int hash(char* needs_hashing)
     return hash_num % SIZE;
 }
 unsigned int count=0;
-
+bool isLoaded = false;
 
 
 /**
@@ -50,13 +50,13 @@ bool check(const char* word)
     }
     word_copy[len]='\0';
     
-    int h=hash(word_copy[len]);
+    int h=hash(word_copy);
     node* cursor= HashTable[h];
     
     while(cursor!=NULL)
     {
-        if(strcmp(cursor->word,word_copy==0))
-        return true;
+        if(strcmp(cursor->word,word_copy)==0)
+        {return true;}
         
         else
         cursor=cursor->next;
@@ -71,7 +71,6 @@ bool check(const char* word)
  */
 bool load(const char* dictionary)
 {
-    bool isLoaded = false;
     FILE* fp;
     fp=fopen(dictionary,"r");
     if(fp==NULL)
@@ -128,6 +127,16 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
+    for(int i=0;i<SIZE;i++)
+    {
+        node* cursor= HashTable[i];
+        while(cursor!=NULL)
+        {
+            node* temp=cursor;
+            cursor = cursor->next;
+            free(temp);
+        }
+    }
+    isLoaded=false;
     return false;
 }
