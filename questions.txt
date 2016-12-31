@@ -28,7 +28,9 @@
 
 6.  In order to prevent the changes in the original dictionary, we have used a constant char*.
 
-7.  TODO
-8.  TODO
-9.  TODO
-10. TODO
+7.  I have used a hashtable. Each element of hashtable has linked list with each element of hashtable
+    pointing to the head of the linked list. structure node of linked list contains a char array and 
+    a next pointer pointing to the next node.
+
+8.  My code was bit slower but I have improved it much. I tried to use tries data structure but i was not very well aquainted with it.
+    So i implemented hashtables.
