@@ -30,7 +30,7 @@ int hash(char* needs_hashing)
 {
     unsigned int hash_num = 0;
     for (int i=0, n=strlen(needs_hashing); i<n; i++)
-        hash_num = (hash << 2) ^ needs_hashing[i];
+        hash_num = (hash_num << 2) ^ needs_hashing[i];
     return hash_num % SIZE;
 }
 
@@ -42,8 +42,28 @@ int hash(char* needs_hashing)
  */
 bool check(const char* word)
 {
-    // TODO
+    int len=strlen(word);
+    char word_copy[len+1];
+    for(int i=0;i<len;i++)
+    {
+        word_copy[i]=tolower(word[i]);//convert every letter in word to lowercase which will remove the prob. of some uppercase letters
+    }
+    word_copy[len]='\0';
+    
+    int h=hash(word_copy[len]);
+    node* cursor= HashTable[h];
+    
+    while(cursor!=NULL)
+    {
+        if(strcmp(cursor->word,word_copy==0))
+        return true;
+        
+        else
+        cursor=cursor->next;
+    }
     return false;
+    
+    
 }
 
 /**
