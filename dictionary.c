@@ -23,7 +23,7 @@ typedef struct node
 }
 node;
 
-node* HashTable[SIZE] = {0};
+node* HashTable[SIZE]={0};//initialising each pointer of array to point to null.
 
 //hash function---source: reddit.com
 int hash(char* needs_hashing)
@@ -33,9 +33,9 @@ int hash(char* needs_hashing)
         hash_num = (hash_num << 2) ^ needs_hashing[i];
     return hash_num % SIZE;
 }
+
 unsigned int count=0;
 bool isLoaded = false;
-
 
 /**
  * Returns true if word is in dictionary else false.
@@ -63,7 +63,6 @@ bool check(const char* word)
     }
     return false;
     
-    
 }
 
 /**
@@ -78,7 +77,7 @@ bool load(const char* dictionary)
         return false;
     }
     
-    while(!feof(fp))
+    while(true)
     {
         node* new_node = malloc(sizeof(node));
         if(new_node==NULL)
@@ -86,9 +85,14 @@ bool load(const char* dictionary)
             printf("memory not allocated\n");
             return false;
         }
-        
         fscanf(fp,"%s",new_node->word);
         new_node->next=NULL;
+        
+        if (feof(fp))
+        {
+            free(new_node);
+            break;
+        }
         count++;
         
         int h = hash(new_node->word);
@@ -138,5 +142,5 @@ bool unload(void)
         }
     }
     isLoaded=false;
-    return false;
+    return true;
 }
