@@ -1,10 +1,33 @@
-0.  TODO
-1.  TODO
-2.  TODO
-3.  TODO
-4.  TODO
-5.  TODO
-6.  TODO
+0.  Longest word in the dictionary while symbolises a lung disease caused due to inhaling ash smoke.
+
+1.  getrusage returns resource usage measures for "int who", which is always
+    RUSAGE_SELF in speller.c. Specifying RUSAGE_SELF returns resource usage 
+    statistics for the calling process, which is the sum of resources used 
+    by all threads in the process.
+
+2.  There are 16 members in a variable of type struct rusage.
+
+3.  To avoid copying, we pass the reference to the structure so that actual changes can be made there, not in their copies.
+
+4.  The key aspect of the for loop is the c = fgetc(fp) function call. fgetc
+    gets the next character (an unsigned char) from fp and advances the 
+    position indicator in fp until the end of the file (EOF) is reached. As
+    each character is received, it is put through an if(if)-elseif-elseif 
+    logical sequence. Summarizing the sequence: 1) If the character is an 
+    alphabetical character or an apostrophe that is not at index 0 of the 
+    word, the character is appended to the word array. 2) Else if the 
+    character is numerical, the word is ignored and we skip ahead to the 
+    next word (which is found after a space). 3) Else if we hit a space or                                                          
+    punctuation, we must have found a whole word so we terminate the word by
+    adding \0 to the word array.
+
+
+5.  It is because fscanf would read till it doesn't get a whitespace or endline,
+    which in worst case could exceed the upper bound of wordlength.
+    If we use fgetc, we can iterate till the upper bound and can neglect the remainder of the string(word).
+
+6.  In order to prevent the changes in the original dictionary, we have used a constant char*.
+
 7.  TODO
 8.  TODO
 9.  TODO
