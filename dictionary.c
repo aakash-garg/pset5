@@ -33,7 +33,7 @@ int hash(char* needs_hashing)
         hash_num = (hash_num << 2) ^ needs_hashing[i];
     return hash_num % SIZE;
 }
-
+unsigned int count=0;
 
 
 
@@ -71,6 +71,7 @@ bool check(const char* word)
  */
 bool load(const char* dictionary)
 {
+    bool isLoaded = false;
     FILE* fp;
     fp=fopen(dictionary,"r");
     if(fp==NULL)
@@ -89,6 +90,7 @@ bool load(const char* dictionary)
         
         fscanf(fp,"%s",new_node->word);
         new_node->next=NULL;
+        count++;
         
         int h = hash(new_node->word);
         node* head = HashTable[h];
@@ -102,6 +104,7 @@ bool load(const char* dictionary)
             HashTable[h]=new_node;
         }
     }
+    isLoaded=true;
     fclose(fp);
     return true;
     
@@ -112,7 +115,11 @@ bool load(const char* dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
+    if(isLoaded)
+    {
+        return count;
+    }
+    else
     return 0;
 }
 
